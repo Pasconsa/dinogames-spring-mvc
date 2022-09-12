@@ -3,7 +3,16 @@ package br.com.dino.dinogames.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity  //JPA vom banco de dados
 public class Pedido {
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) //anotação jpa sequencial com banco de dados
+	private long id;
 
 	private String nomeProduto;
 	private BigDecimal valorNegociado;
@@ -11,6 +20,22 @@ public class Pedido {
 	private String urlProduto;
 	private String urlImagem;
 	private String descricao;
+	
+	
+	
+	/*@Enumerated(EnumType.STRING)
+	private StatusPedido status;
+		
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user; */
+	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getNomeProduto() {
 		return nomeProduto;
