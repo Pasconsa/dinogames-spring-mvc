@@ -5,6 +5,21 @@
 				 <!-- endereço bootstrap css para aplicação -->
 	<body>
 		<div class="container">
+				<div class="jumbotron mb-0">
+				<h1 class="display-4">Meus Pedidos</h1>   <!-- 04 bootstrap -->
+			</div>
+		
+			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3"> <!-- 04 bootstrap -->
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="">Todos</a>
+					<a class="nav-item nav-link" href="">Aguardando</a>
+					<a class="nav-item nav-link" href="">Aprovado</a>
+					<a class="nav-item nav-link" href="">Entregue</a>
+				</div>
+				<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a> <!-- 04 btn button bootstrap , href vai para uma pagina solicitada este botão-->
+			</nav>
+		
+		
 			<div class="card" th:each="pedido : ${pedidos}">  <!-- th:text="${nome}" = thymeleaf atributo nome do controller pedido -->
 				<div class="card-header" th:text="${pedido.nomeProduto}">Nome do Produto</div>  <!-- th:text="${nome}" = buscar informação da classe pedido.nome produto -->
 				<div class="card-body">
