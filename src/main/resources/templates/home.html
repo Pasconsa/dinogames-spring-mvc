@@ -9,23 +9,31 @@
 				
 					<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3"> <!-- 04 bootstrap -->
 						<div class="navbar-nav">
-							<a class="nav-item nav-link active" href="">Todos</a>
-							<a class="nav-item nav-link" href="">Aguardando</a>
-							<a class="nav-item nav-link" href="">Aprovado</a>
-							<a class="nav-item nav-link" href="">Entregue</a>
+							<a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" href="/home">Todos</a>
+							<a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-item nav-link" href="/home/aguardando">Aguardando</a> <!-- 07 se status for igual aguardando adiciono a classe active-->
+							<a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-item nav-link" href="/home/aprovado">Aprovado</a>
+							<a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link" href="/home/entregue">Entregue</a>
 						</div>
 						<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a> <!-- 04 btn button bootstrap , href vai para uma pagina solicitada este botão-->
 					</nav>
 				
 				
 					<div class="card mb-3" th:each="pedido : ${pedidos}">  <!-- th:text="${nome}" = thymeleaf atributo nome do controller pedido -->
+						
 						<div class="card-header" th:text="${pedido.nomeProduto}">Nome do Produto</div>  <!-- th:text="${nome}" = buscar informação da classe pedido.nome produto -->
+							<th:block th:switch="${pedido.status.name()}"> <!-- 07 th:block executar um programa e fazer seitch de acordo com status name valor status string-->
+								<div th:case="'AGUARDANDO'" class="card-header alert-warning" th:text="${pedido.nomeProduto}">Nome do Produto</div> <!-- 07 apresente aguardando a classe vai estar nesta cor -->
+								<div th:case="'APROVADO'" class="card-header alert-success" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+								<div th:case="'ENTREGUE'" class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+							</th:block>
+						
 						<div class="card-body">
 							<div class="row">
 								<div class="col-12 col-sm-8 mb-3">
 									<div class="row ">
-										<div class="col-md-5">Valor: <span th:text="${pedido.valorNegociado}">200,99</span></div>
-										<div class="col-md-6">Data da entrega: <span th:text="${pedido.dataDaEntrega}">10/02/2020</span></div>
+										<div class="col-md-5">Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valorNegociado, 3, 'POINT', 2, 'COMMA')}">200,99</span></div>
+																															<!-- 07 thymeleaf valor do numero para moeda -->
+										<div class="col-md-6">Data da entrega: <span th:text="${#temporals.format(pedido.dataDaEntrega, 'dd/MM/yyyy')}">10/02/2020</span></div> <!-- 07 thymeleaf data-->
 									</div>
 									
 									<div>Produto</div> 

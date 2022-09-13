@@ -3,6 +3,7 @@ package br.com.dino.dinogames.dto;
 import javax.validation.constraints.NotBlank;
 
 import br.com.dino.dinogames.model.Pedido;
+import br.com.dino.dinogames.model.StatusPedido;
 
 public class RequisicaoNovoPedido {    //04 Esta classe esta recebendo os novos pedidos aqui sera salva
 
@@ -45,6 +46,7 @@ public class RequisicaoNovoPedido {    //04 Esta classe esta recebendo os novos 
 		pedido.setNomeProduto(nomeProduto);
 		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlProduto(urlProduto);
+		pedido.setStatus(StatusPedido.AGUARDANDO);
 		return pedido;
 	}
 	

@@ -36,7 +36,7 @@ public class PedidoController {
 		Pedido pedido = requisicao.toPedido(); // pedir para a requisição criar um “pedido”
 		pedidoRepository.save(pedido);
 		
-		return "pedido/formulario";
+		return "redirect:/home"; //07 quando pedido for salvo voltar para home
 	} 
 	
 }
