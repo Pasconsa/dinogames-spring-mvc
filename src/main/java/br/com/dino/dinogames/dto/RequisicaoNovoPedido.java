@@ -1,11 +1,16 @@
 package br.com.dino.dinogames.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import br.com.dino.dinogames.model.Pedido;
 
 public class RequisicaoNovoPedido {    //04 Esta classe esta recebendo os novos pedidos aqui sera salva
 
+	@NotBlank // 05 anotação do java validation que esse campo não pode ficar vazio
 	private String nomeProduto;  //04 mesmo nome do pedido html
+	@NotBlank
 	private String urlProduto;
+	@NotBlank
 	private String urlImagem;
 	private String descricao;
 	
