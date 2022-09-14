@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity  //JPA vom banco de dados
 public class Pedido {
@@ -27,11 +29,17 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)  //07 PARA salvar no banco de dados e colocar tipo de innformação String
 	private StatusPedido status;
 		
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	private User user; */
+	@ManyToOne(fetch = FetchType.LAZY)  //09.3 carregar os dados  do usuario
+	private User user; 
 	
 	
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public long getId() {
 		return id;
 	}

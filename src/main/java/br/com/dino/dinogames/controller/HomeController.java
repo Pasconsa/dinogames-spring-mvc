@@ -1,6 +1,7 @@
 package br.com.dino.dinogames.controller;
 
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class HomeController {  //Home controller depende de Pedido , Pedido Repo
 	private PedidoRepository pedidoRepository;
 	
 	@GetMapping
-	public String home(Model model) {
-		List<Pedido> pedidos = pedidoRepository.findAll();
+	public String home(Model model, Principal principal) {  //9.5 Adicionar o princiapl
+		List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName()); //09.5 pedidos encontrar por usuario  com princiapl getname Qual é o nome do usuario logado
 		model.addAttribute("pedidos", pedidos);        //passamos valores, variáveis para a “view” utilizando o “model”, aquela interface do Spring? não precisamos colocar como atributo do “HttpServeltRequest”. Nós colocamos como “addAttribute(“pedidos”, pedidos”)”.
 		return "home"; 
 	}

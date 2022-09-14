@@ -6,8 +6,10 @@
 	<body>
 		<div class="container">
 			<div th:replace="~{base :: titulo('Novo Pedido')}"></div>
+			
+			
 			<div class="card mt-3">  <!-- 05 th:object associa classe requisição pedido com th:field com atributo desse objeto para gravar informação peenchida -->
-					<form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST"> <!-- 04 action é onde sera submetido as informçãos do botão cadastrar  -->
+					<form th:action="@{/pedido/novo}" th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST"> <!-- 04 action é onde sera submetido as informçãos do botão cadastrar  -->
 						<div class="form-group"> <!-- 05 organizar em grupo bootstrap -->   
 							<label for="nomeProduto">Produto</label>
 							<input th:field="*{nomeProduto}" th:errorClass="is-invalid" class="form-control" placeholder="nome do produto"/> <!-- 04  placeholder aviso dentro da caixa , 05 form control bootstrap organizar-->

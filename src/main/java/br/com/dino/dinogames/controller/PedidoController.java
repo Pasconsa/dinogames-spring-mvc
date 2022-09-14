@@ -3,6 +3,7 @@ package br.com.dino.dinogames.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.dino.dinogames.dto.RequisicaoNovoPedido;
 import br.com.dino.dinogames.model.Pedido;
+import br.com.dino.dinogames.model.User;
 import br.com.dino.dinogames.repository.PedidoRepository;
+import br.com.dino.dinogames.repository.UserRepository;
 
 
 @Controller
@@ -20,6 +23,9 @@ public class PedidoController {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;  //04 para salvar no pedido repository banco dedados
+	
+	@Autowired
+	private UserRepository userRepository; //9.05 usuario injetado para seu pedidido
 
 	@GetMapping("formulario")
 	public String formulario(RequisicaoNovoPedido requisição) { //05 formulario precisa de uma requisição novo pedido Retirar erro
@@ -33,9 +39,13 @@ public class PedidoController {
 		}
 		
 		
-		Pedido pedido = requisicao.toPedido(); // pedir para a requisição criar um “pedido”
-		pedidoRepository.save(pedido);
+String username = SecurityContextHolder.getContext().getAuthentication().getName();  //9.05 get context segurança , authentication é o usuario
 		
+		User usuario = userRepository.findByUsername(username);  //9.05
+		Pedido pedido = requisicao.toPedido();
+		pedido.setUser(usuario);
+		pedidoRepository.save(pedido);
+	
 		return "redirect:/home"; //07 quando pedido for salvo voltar para home
 	} 
 	
