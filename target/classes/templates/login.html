@@ -1,0 +1,25 @@
+<html>               <!-- 08 configuração da tela de login do aplicativo -->
+	<meta charset="UTF-8"/>
+	<head th:replace="~{base :: head}"></head>
+	<body>
+		<div th:replace="~{base :: logo}"></div>
+	
+		<div class="container">
+			<div th:replace="~{base :: titulo('Login')}"></div>
+		
+			<div class="card mb-3">
+				<form th:action="@{/login}" class="card-body" method="post">  <!-- 08 spring security recebe do post da pagina login -->
+					<div class="form-group">                                  <!-- 08 atributo do usuario -->
+						<label for="username">Usuário</label>
+						<input name="username"  class="form-control" placeholder="usuário"/>
+					</div>
+					<div class="form-group">
+						<label for="password">Senha</label>         <!-- 08 atributo senha -->             
+						<input type="password" name="password" class="form-control" placeholder="senha"/>
+					</div>
+					<button class="btn btn-primary" type="submit">Login</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
