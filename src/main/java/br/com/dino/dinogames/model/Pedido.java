@@ -2,7 +2,9 @@ package br.com.dino.dinogames.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity  //JPA vom banco de dados
 public class Pedido {
@@ -28,11 +33,16 @@ public class Pedido {
 	
 	@Enumerated(EnumType.STRING)  //07 PARA salvar no banco de dados e colocar tipo de innformação String
 	private StatusPedido status;
-		
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)  //09.3 carregar os dados  do usuario
+	@JsonIgnore //11.1
 	private User user; 
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+	private List<Oferta> ofertas;
 	
+
 	
 	public User getUser() {
 		return user;
@@ -61,6 +71,9 @@ public class Pedido {
 		this.nomeProduto = nomeProduto;
 	}
 
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
+	}
 	public BigDecimal getValorNegociado() {
 		return valorNegociado;
 	}
@@ -100,5 +113,9 @@ public class Pedido {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public List<Oferta> getOfertas() {
+		return ofertas;
+	}
+	
 
 }

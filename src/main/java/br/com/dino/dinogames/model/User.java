@@ -30,6 +30,12 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
