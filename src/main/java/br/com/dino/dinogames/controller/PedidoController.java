@@ -39,11 +39,11 @@ public class PedidoController {
 		}
 		
 		
-String username = SecurityContextHolder.getContext().getAuthentication().getName();  //9.05 get context segurança , authentication é o usuario
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();  //9.05 get context segurança , authentication é o usuario
+		User user = userRepository.findByUsername(username);  //9.05
 		
-		User usuario = userRepository.findByUsername(username);  //9.05
 		Pedido pedido = requisicao.toPedido();
-		pedido.setUser(usuario);
+		pedido.setUser(user);
 		pedidoRepository.save(pedido);
 	
 		return "redirect:/home"; //07 quando pedido for salvo voltar para home

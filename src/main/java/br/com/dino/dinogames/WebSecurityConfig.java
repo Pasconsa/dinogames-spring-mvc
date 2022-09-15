@@ -26,11 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {  //08.1 configuração de  autorização
 		http
 		.authorizeRequests()
-			.anyRequest().authenticated()  //08.1 esta dizendo que todas aplicações tem que estar autorizao por um login
+		.antMatchers("/home/**") //10.2 permitir todos acessar home sem login
+			.permitAll()
+		.anyRequest()
+			.authenticated()  //08.1 esta dizendo que todas aplicações tem que estar autorizao por um login
 		.and()
 		.formLogin(form -> form   //08.1 Qual é a url da pagina de login vai esta barra login e todo mundo é permitido
             .loginPage("/login")
-            .defaultSuccessUrl("/home", true) // 9.1 essa linha que vai resolver seu problema, ela define qual é a 
+            .defaultSuccessUrl("/usuario/pedido", true) // 9.1 essa linha que vai resolver seu problema, ela define qual é a 
                                                   //página padrão da sua aplicação, então sempre que você logar ele vai te direcionar para a /home
             .permitAll()
         )

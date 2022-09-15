@@ -5,6 +5,8 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +18,7 @@ import br.com.dino.dinogames.model.Pedido;
 import br.com.dino.dinogames.model.StatusPedido;
 import br.com.dino.dinogames.repository.PedidoRepository;
 
+
 @Controller
 @RequestMapping("/home")  //07 todas requisições home vai bater aqui e distribuir nas debaixo
 public class HomeController {  //Home controller depende de Pedido , Pedido Repository e anotações acima
@@ -25,24 +28,14 @@ public class HomeController {  //Home controller depende de Pedido , Pedido Repo
 	
 	@GetMapping
 	public String home(Model model, Principal principal) {  //9.5 Adicionar o princiapl
-		List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName()); //09.5 pedidos encontrar por usuario  com princiapl getname Qual é o nome do usuario logado
+		
+		Sort sort = Sort.by("dataDaEntrega").descending();
+		PageRequest paginacao = PageRequest.of(0, 10, sort);  //10.3 ordenar por data de entrega de a primeira pagina 10 itens por pagina
+		
+		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE, paginacao); //10.2 pagina home aparecer apenas entregue
 		model.addAttribute("pedidos", pedidos);        //passamos valores, variáveis para a “view” utilizando o “model”, aquela interface do Spring? não precisamos colocar como atributo do “HttpServeltRequest”. Nós colocamos como “addAttribute(“pedidos”, pedidos”)”.
 		return "home"; 
 	}
+
 	
-	
-	@GetMapping("/{status}")
-	public String porStatus(@PathVariable("status") String status, Model model) {
-		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.valueOf(status.toUpperCase())); 	//07 para listar somente pedidos que esta aguradando, declarar esse metodo na interface pedido.repository
-		model.addAttribute("pedidos", pedidos);
-		model.addAttribute("status", status);
-		return "home"; 
-		
-	}
-	
-	
-	@ExceptionHandler(IllegalArgumentException.class) // 07 quando apresentar um erro no na lista volta a pagina home
-	public String onError() {
-		return "redirect:/home";
-	}
 }
