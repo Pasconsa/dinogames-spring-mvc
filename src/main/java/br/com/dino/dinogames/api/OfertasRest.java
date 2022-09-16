@@ -2,8 +2,11 @@ package br.com.dino.dinogames.api;  //12.1 ofertas consumir por rest
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +24,7 @@ public class OfertasRest {
 	private PedidoRepository pedidoRepository;
 	
 	@PostMapping
-	public Oferta criaOferta(RequisicaoNovaOferta requisicao) {
+	public Oferta criaOferta(@Valid @RequestBody RequisicaoNovaOferta requisicao) {   //13.2 validação da formatação dos numeros
 		Optional<Pedido> pedidoBuscado = pedidoRepository.findById(requisicao.getPedidoId());
 		if(!pedidoBuscado.isPresent()) {
 			return null;
