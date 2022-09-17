@@ -37,8 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                                   //página padrão da sua aplicação, então sempre que você logar ele vai te direcionar para a /home
             .permitAll()
         )
-		.logout(logout -> logout.logoutUrl("/logout")) //08.2 toda vez que o logado fazer logout sera deslogado
-		.csrf().disable();  //9.07  desabilitar erro de cadastrar formulario devido a segurança
+		.logout(logout -> {
+			logout.logoutUrl("/logout")                   //08.2 toda vez que o logado fazer logout sera deslogado
+				.logoutSuccessUrl("/home");
+		}).csrf().disable();                             //9.07  desabilitar erro de cadastrar formulario devido a segurança
+		
 	}
 	
 	@Override
@@ -66,3 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.withUser(user);  */                 
 	}
 }
+
+
+

@@ -39,9 +39,6 @@ public class Pedido {
 	@JsonIgnore //11.1
 	private User user; 
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
-	private List<Oferta> ofertas;
-	
 
 	
 	public User getUser() {
@@ -71,9 +68,7 @@ public class Pedido {
 		this.nomeProduto = nomeProduto;
 	}
 
-	public void setOfertas(List<Oferta> ofertas) {
-		this.ofertas = ofertas;
-	}
+
 	public BigDecimal getValorNegociado() {
 		return valorNegociado;
 	}
@@ -113,9 +108,7 @@ public class Pedido {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public List<Oferta> getOfertas() {
-		return ofertas;
-	}
+
 	
 
 }

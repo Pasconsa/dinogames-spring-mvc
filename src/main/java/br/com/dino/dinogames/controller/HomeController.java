@@ -32,7 +32,7 @@ public class HomeController {  //Home controller depende de Pedido , Pedido Repo
 		Sort sort = Sort.by("dataDaEntrega").descending();
 		PageRequest paginacao = PageRequest.of(0, 10, sort);  //10.3 ordenar por data de entrega de a primeira pagina 10 itens por pagina
 		
-		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE, paginacao); //10.2 pagina home aparecer apenas entregue
+		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.AGUARDANDO, paginacao); //10.2 pagina home aparecer apenas entregue
 		model.addAttribute("pedidos", pedidos);        //passamos valores, variáveis para a “view” utilizando o “model”, aquela interface do Spring? não precisamos colocar como atributo do “HttpServeltRequest”. Nós colocamos como “addAttribute(“pedidos”, pedidos”)”.
 		return "home"; 
 	}

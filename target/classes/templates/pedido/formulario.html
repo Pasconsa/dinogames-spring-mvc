@@ -5,40 +5,48 @@
 		<div th:replace="~{base :: logo }"></div>
 	<body>
 		<div class="container">
-			<div th:replace="~{base :: titulo('Novo Pedido')}"></div>
+			<div th:replace="~{base :: titulo('Anuncio do seu Game Usado !!!')}"></div>
 			
 			
 			<div class="card mt-3">  <!-- 05 th:object associa classe requisição pedido com th:field com atributo desse objeto para gravar informação peenchida -->
 					<form th:action="@{/pedido/novo}" th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST"> <!-- 04 action é onde sera submetido as informçãos do botão cadastrar  -->
 						<div class="form-group"> <!-- 05 organizar em grupo bootstrap -->   
-							<label for="nomeProduto">Produto</label>
+							<label for="nomeProduto"><b>Produto</b></label>
 							<input th:field="*{nomeProduto}" th:errorClass="is-invalid" class="form-control" placeholder="nome do produto"/> <!-- 04  placeholder aviso dentro da caixa , 05 form control bootstrap organizar-->
-							<small>Informa qual o nome do produto.</small>
+							<small>Informa qual o nome do produto para venda.</small>
 							<div class="invalid-feedback" th:errors="*{nomeProduto}">
 								Erros do nome do produto
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="urlProduto">Url</label>
+							<label for="urlProduto"><b>Url</b></label>
 							<input th:field="*{urlProduto}" th:errorClass="is-invalid" class="form-control" placeholder="url do produto"/>  
-							<small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
+							<small> Caso já exista anuncio em outra plataforma Cole a url da página aqui.</small>
 							<div class="invalid-feedback" th:errors="*{urlProduto}"> <!-- 05 th:errorClass="is-invalid" th:errors="*{urlProduto}"> apresentar erros de preenchimento ao usuario-->
 								Erros da url do produto                                <!--05 class="invalid-feedback" do bootstrap campo fica vermelho apresentando erro -->
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="urlImagem">Imagem</label>
+							<label for="urlImagem"><b>Imagem</b></label>
 							<input th:field="*{urlImagem}" th:errorClass="is-invalid" class="form-control" placeholder="url da imagem"/>
-							<small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir compradores.</small>
+							<small>Copie a url de imagem do produto e cole aqui para ajudar a conseguir compradores.</small>
 							<div class="invalid-feedback" th:errors="*{urlImagem}">
 								Erros da url da imagem
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="descricao">Descrição</label>
+							<label for="valorNegociado"><b>Valor para Negocio</b></label>
+							<input th:field="*{valorNegociado}" th:errorClass="is-invalid" class="form-control" placeholder="valorNegociado"/>
+							<small>Adicione o valor do seu produto.</small>
+							<div class="invalid-feedback" th:errors="*{valorNegociado}">
+								Erros da url da imagem
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="descricao"><b>Descrição</b></label>
 							<textarea th:field="*{descricao}" class="form-control" placeholder="Adicione detalhes importantes para ajudar o comprador."></textarea>
 						</div>
-						<button class="btn btn-primary" type="submit">Cadastrar</button>
+						<button class="btn btn-success" type="submit">Cadastrar</button><small <b> Entraremos em contato através dos dados da sua conta.</b></small>
 					</form>
 				</div>
 			</div>

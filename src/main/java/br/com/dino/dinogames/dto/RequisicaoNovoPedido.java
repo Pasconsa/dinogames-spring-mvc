@@ -1,6 +1,9 @@
 package br.com.dino.dinogames.dto;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import br.com.dino.dinogames.model.Pedido;
 import br.com.dino.dinogames.model.StatusPedido;
@@ -9,12 +12,21 @@ public class RequisicaoNovoPedido {    //04 Esta classe esta recebendo os novos 
 
 	@NotBlank // 05 anotação do java validation que esse campo não pode ficar vazio
 	private String nomeProduto;  //04 mesmo nome do pedido html
-	@NotBlank
+	
 	private String urlProduto;
 	@NotBlank
 	private String urlImagem;
 	private String descricao;
+	@NotNull
+	private BigDecimal valorNegociado;
 	
+	
+	public BigDecimal getValorNegociado() {
+		return valorNegociado;
+	}
+	public void setValorNegociado(BigDecimal valorNegociado) {
+		this.valorNegociado = valorNegociado;
+	}
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
@@ -46,6 +58,7 @@ public class RequisicaoNovoPedido {    //04 Esta classe esta recebendo os novos 
 		pedido.setNomeProduto(nomeProduto);
 		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlProduto(urlProduto);
+		pedido.setValorNegociado(valorNegociado);
 		pedido.setStatus(StatusPedido.AGUARDANDO);
 		return pedido;
 	}
