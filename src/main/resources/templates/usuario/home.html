@@ -4,11 +4,13 @@
 		<div th:replace="~{base :: logo}"></div>
 	
 		<div class="container">
-			<div th:replace="~{base :: titulo('Meus Pedidos de Anuncios')}"></div>
+			<div th:replace="~{base :: titulo('Meus Anuncios e status de Venda')}"></div>
 		
 			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
 				<div class="navbar-nav">
-				
+					
+					<a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido}">Todos</a>
+					<a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/aguardando}">Aguardando</a>
 					<a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/aprovado}"><b>Venda Aprovada</b></a>
 					<a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/entregue}"><b>Entregue</b></a>
 					

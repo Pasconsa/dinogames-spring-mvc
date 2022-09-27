@@ -5,7 +5,7 @@
 		<div th:replace="~{base :: logo }"></div>
 			
 			<div class="container">
-				<div th:replace="~{base :: titulo('Anuncios dos nossos Gamers ')}"></div> <!-- 10.2 titulo da pagina foi alterado ultimos pedidos pois home apenas mota entrega -->
+				<div th:replace="~{base :: titulo('Anuncios dos nossos Parceiros ')}"></div> <!-- 10.2 titulo da pagina foi alterado ultimos pedidos pois home apenas mota entrega -->
 				
 					<div class="card mb-3" th:each="pedido : ${pedidos}">  <!-- th:text="${nome}" = thymeleaf atributo nome do controller pedido -->
 						<div class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>  <!-- th:text="${nome}" = buscar informação da classe pedido.nome produto -->
